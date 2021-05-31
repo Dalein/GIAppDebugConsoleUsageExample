@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "GIAppDebugConsole",
+        "repositoryURL": "https://github.com/Dalein/GIAppDebugConsole.git",
+        "state": {
+          "branch": null,
+          "revision": "eb49c607c9e4b239f89da0e4e6d79ba1458daa8e",
+          "version": "0.5.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

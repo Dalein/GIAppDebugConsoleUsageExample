@@ -29,10 +29,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 private extension AppDelegate {
     
     func configConsole() {
-        GIAppDebugConsoleConfigurator.configureAppDebugConsole(consoleUIConfig: .init(consoleBackgroundColor: .black,
-                                                                                      textColor: .systemGreen,
-                                                                                      font: .systemFont(ofSize: 14, weight: .light),
-                                                                                      menuButtonConfig: .init(image: .init(named: "ellipsis"))))
+        GIAppDebugConsoleConfigurator.configureAppDebugConsole(
+            consoleUIConfig: .init(consoleDefaultSize: .init(width: 300, height: 200),
+                                   consoleMaxSize: .init(width: 500, height: 500),
+                                   consoleBackgroundColor: .red,
+                                   textColor: .white,
+                                   font: .systemFont(ofSize: 20, weight: .bold),
+                                   menuButtonConfig: .init(size: .init(width: 50, height: 50),
+                                                           backgroundColor: .black,
+                                                           image: .init(named: "ellipsis"),
+                                                           title: nil,
+                                                           tintColor: .blue, alpha: 0.7)))
         
         GIAppDebugConsole.shared.addAction(.init(title: "Copy Push token", handler: { [weak self] in
             self?.copyPushToken()

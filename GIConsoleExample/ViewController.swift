@@ -14,15 +14,55 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let log = """
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel gravida ante, ultricies commodo urna. Quisque lectus turpis, maximus vel efficitur et, hendrerit ut tellus. Curabitur sit amet quam sodales, pharetra nibh ut, imperdiet quam. Donec scelerisque eu tellus et gravida. Sed sit amet sodales ex. Donec consectetur odio vel interdum ultricies. Sed faucibus consequat neque vitae volutpat. Sed sagittis eros a nisl posuere vehicula consequat a magna. Duis erat felis, cursus et porttitor ut, fermentum nec quam. Aliquam tellus nulla, ultricies at rhoncus a, iaculis sit amet est. In fermentum nisi augue. Praesent molestie ullamcorper diam a congue. Etiam eget fringilla orci, eget consequat justo.
-
-        Ut quis elit quis mauris tristique porta. Nulla tincidunt velit nisi, vel venenatis turpis pharetra in. Suspendisse mi justo, tristique non erat quis, bibendum maximus lectus. Phasellus in nibh elit. Pellentesque ut justo luctus, bibendum augue non, aliquam est. Aliquam erat volutpat. Nullam vitae purus at diam vulputate pharetra. Ut faucibus dapibus cursus. Aliquam quis laoreet enim, et euismod est.
-
-        Nulla vel ex sagittis, malesuada purus eu, porta metus. Maecenas felis lacus, varius vitae risus ac, fringilla porta odio. Quisque non augue vel orci lacinia congue. Phasellus varius felis ullamcorper, sollicitudin sapien ut, mollis velit. Praesent nec lacus sed massa blandit rhoncus nec sit amet turpis. Ut leo lorem, vehicula sit amet interdum id, semper sit amet enim. Pellentesque maximus tortor eu facilisis posuere. Nam commodo condimentum justo, ut tristique orci gravida non. Donec id nunc lacus. Sed lobortis diam et rutrum blandit. Nullam sed imperdiet nisi, in volutpat tellus. Aliquam faucibus vulputate felis sit amet finibus. Praesent elementum rutrum nibh, non consectetur ipsum facilisis ut. Nullam rutrum in risus sed sollicitudin.
-
-        Praesent in rutrum lacus. Nullam scelerisque odio id orci ornare, et lacinia magna tincidunt. Curabitur ornare non odio et pellentesque. Fusce scelerisque, mauris ut volutpat luctus, ex odio pulvinar turpis, sit amet rutrum felis nisl ac nisl. Cras dapibus interdum quam, sed lobortis magna tempus in. Phasellus tincidunt, felis eget consectetur semper, quam magna tempor ipsum, id sodales dui massa laoreet neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-        Nulla elit sapien, varius id tincidunt pharetra, faucibus sed urna. Aenean nec volutpat erat. Praesent nec erat id nisl suscipit dictum vel non risus. Aenean condimentum purus vitae eleifend dictum. In hendrerit, est sit amet commodo laoreet, mi sapien viverra purus, sit amet iaculis metus lectus eget ante. Ut interdum lacus vel maximus sagittis. Integer rutrum, urna et vulputate condimentum, magna nunc hendrerit quam, condimentum cursus ante arcu et orci. Morbi tellus orci, finibus at metus sit amet, ultricies bibendum dolor. Etiam erat metus, malesuada id ex nec, cursus posuere arcu. Suspendisse potenti. Aliquam sagittis arcu erat, sed interdum magna pharetra id. Sed dapibus, est eu aliquet bibendum, elit nisi pellentesque velit, eu feugiat ante velit non justo.
+        200 | POST /instance/services/logs
+            ...
+            {
+              "environment": "dev",
+              "log_type": "AppCluster",
+              "start_time": "2019-08-16T13:17:22.421Z",
+              "duration": 10,
+              "min_log_level": "all"
+            }
+        
+        
+        200 | GET /instance/services/logs/8015/file
+        
+        301 | DELETE /instance/services/logs/8015
+        
+        
+        curl -X GET 'https://my.api.swiftype.com/api/as/v1/engines/test/logs/api' \
+        -H 'Content-Type: application/json' \
+        -H 'Authorization: Bearer hd57ehjkuydwcvb9545'
+        
+        Response:
+        {
+          "results": [
+            {
+              "timestamp": 15974335,
+              "http_method": GET,
+              "path": as/v1/engines/test/logs,
+              "full_request_path": my.api.swiftype.com/api/as/v1/engines/test/logs/api,
+              "status": OK,
+              "user_agent": iOS
+            }
+          ],
+          "meta": {
+            "query": string,
+            "filters": {
+              "date": {
+                "from": string,
+                "to": string
+              }
+            },
+            "page": {
+              "current": number,
+              "total_pages": number,
+              "total_results": number,
+              "size": number
+            }
+          }
+        }
+        
         """
         
         GIAppDebugConsole.shared.log(log)
@@ -38,9 +78,17 @@ class ViewController: UIViewController {
     
     @IBAction func showModalVC(_ sender: Any) {
         let vc = UIViewController()
-        vc.view.backgroundColor = .green
+        vc.view.backgroundColor = .groupTableViewBackground
         
-        self.present(vc, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: {
+            let log = """
+            GET /instance/services/logs/8015/file
+            
+            200 | /instance/services/logs/8015/file
+            """
+            GIAppDebugConsole.shared.log(log)
+        })
+        
     }
     
 }

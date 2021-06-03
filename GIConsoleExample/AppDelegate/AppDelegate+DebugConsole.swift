@@ -30,11 +30,10 @@ private extension AppDelegate {
         GIAppDebugConsoleConfigurator.configureAppDebugConsole(
             consoleUIConfig: .init(consoleDefaultSize: .init(width: 300, height: 200),
                                    consoleMaxSize: .init(width: 500, height: 500),
-                                   consoleBackgroundColor: .red,
+                                   consoleBackgroundColor: .black,
                                    textColor: .white,
-                                   font: .systemFont(ofSize: 15, weight: .bold),
                                    menuButtonConfig: .init(size: .init(width: 34, height: 34),
-                                                           backgroundColor: .black,
+                                                           backgroundColor: .systemGray,
                                                            image: .init(named: "ellipsis"),
                                                            title: nil,
                                                            tintColor: .green,
